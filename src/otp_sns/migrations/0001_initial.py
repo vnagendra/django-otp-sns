@@ -5,8 +5,7 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-import src.otp_sns.models
-
+import otp_sns.models
 
 class Migration(migrations.Migration):
 
@@ -24,8 +23,8 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(help_text='The human-readable name of this device.', max_length=64)),
                 ('confirmed', models.BooleanField(default=True, help_text='Is this device ready for use?')),
                 ('number', models.CharField(help_text='The mobile number to deliver tokens to (E.164).', max_length=30)),
-                ('key', models.CharField(default=src.otp_sns.models.default_key, help_text='A random key used to generate tokens (hex-encoded).', max_length=40, validators=[
-                    src.otp_sns.models.key_validator])),
+                ('key', models.CharField(default=otp_sns.models.default_key, help_text='A random key used to generate tokens (hex-encoded).', max_length=40, validators=[
+                    otp_sns.models.key_validator])),
                 ('last_t', models.BigIntegerField(default=-1, help_text='The t value of the latest verified token. The next token must be at a higher time step.')),
                 ('user', models.ForeignKey(help_text='The user that this device belongs to.', on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
